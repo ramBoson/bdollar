@@ -19,6 +19,7 @@ function MobileApp(){
     setbalance(web3.eth.getBalance(lottery.options.address));
     settotalsupply(lottery.methods.totalSupply().call());
     setprice( oracle.methods.getDollarPrice().call());
+    setprice( oracle.methods.epoch().call());
     
   
     //setState({totalsupply,price,balance});

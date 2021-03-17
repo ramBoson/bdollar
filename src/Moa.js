@@ -12,12 +12,18 @@ import Thirdpage from "./Thirdpage";
 import Fourthpage from "./Fourthpage";
 import Fifthpage from "./Fifthpage";
 
+import Treasury from './Treasury';
+
 function Moa(){
   
   const [balance,setbalance] = useState("");
   const [totalsupply,settotalsupply] = useState("");
   const [circulatingsupply,setcirculatingsupply] = useState("");
   const [price,setprice] = useState("");
+
+  const [epochs,setepoch] = useState("");
+
+  const [nextseigniorage,setnextseigniorage] = useState("");
 
 
 
@@ -38,15 +44,22 @@ function Moa(){
     setprice( await oracle.methods.getDollarPrice().call());
     //setprice( await oracle.methods.getDollarPrice().call());
 
+    setepoch(await Treasury.methods.epoch().call());
+    setnextseigniorage(await Treasury.methods.nextEpochPoint().call());
+
     alert(balance);
     alert(totalsupply);
     alert(circulatingsupply);
-    
-  
-    //setState({totalsupply,price,balance});
-  
-    
-    
+    alert(epochs);
+    alert(nextseigniorage);
+
+
+    //await lottery.methods.balanceOf(accounts[0]).send({
+      //from: accounts[0]
+      //value: this.setState({c:accounts[0]})
+      
+      //});
+    //setState({totalsupply,price,balance});    
     //var te=tid;
 
     
@@ -55,11 +68,7 @@ function Moa(){
 
   //var getaaa=new web3.eth.Contract(abi,poda);
   
-  //await geta.methods.tokenURI(te).send({
-  //from: accounts[0]
-  //value: this.setState({c:accounts[0]})
   
-  //});
 
 
     //var printgeta=await getaaa.methods.tokenURI(te).call();
@@ -106,6 +115,15 @@ return (
         <p>
           balanceOf<br/> {balance}
          </p>
+
+         <p>
+          epoch<br/> {epochs}
+         </p>
+
+         <p>
+         nextEpochPoint<br/> {nextseigniorage}
+         </p>
+
 
         <hr />
 
